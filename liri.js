@@ -43,7 +43,7 @@ function twitterApi() {
 	
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
 	  
-	  if (!error) {
+	    if (!error) {
 		    for (var i = 0; i < tweets.length; i++) {
 		    	console.log("@" + tweets[i].user.name);
 		    	console.log("Tweet: " + tweets[i].text);
@@ -54,7 +54,7 @@ function twitterApi() {
 		    	"\nCreated at: " + tweets[i].created_at + "\n---------------------twitter----------------------")
 		    } 
   		} 
-	}) 
+	}); 
 }; 
 
 function spotifyApi() {
@@ -85,7 +85,7 @@ function spotifyApi() {
  		else {
  			return console.log('Error occurred: ' + err);
  		}
-	})
+	});
 };
 
 function omdbApi() {
@@ -100,7 +100,7 @@ function omdbApi() {
 	var queryUrl = "http://www.omdbapi.com/?t=" + secondInput + "&y=&plot=short&apikey=40e9cece";
 
 	request(queryUrl, function(error, response, body) {
-		if (!error && response.statusCode == 200) {
+		if (!error && response.statusCode === 200) {
 		
 			var body = JSON.parse(body);
 
@@ -121,8 +121,8 @@ function omdbApi() {
 		else {
 			console.log("Error occured: " + error)
 		}
-	})
-}
+	});
+};
 
 function randomTxt() {
 
@@ -139,10 +139,4 @@ function randomTxt() {
         	break;
     	}
   	});
-} 
-
-
-
-
-
-
+}; 
