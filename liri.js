@@ -8,31 +8,31 @@ var fs = require('fs');
 // Users first Action.
 var firstInput = process.argv[2];
 // Action for second parameter: spotify or movie. 
-var secondInput = process.argv.slice(3).join("+");
+var secondInput = process.argv.slice(3).join();
 
 // Commands to call a function.
 switch(firstInput) {
 
 	case "my-tweets":
-		twitterApi();
-		break;
+	twitterApi();
+	break;
 
 	case "spotify-this-song":
-		spotifyApi();
-		break;
+	spotifyApi();
+	break;
 
 	case "movie-this":
-		omdbApi();
-		break;
+	omdbApi();
+	break;
 
 	case "do-what-it-says":
-		randomTxt();
-		break;
+	randomTxt();
+	break;
 
 	default:
-		// Give user command options.
-		console.log("Hello, my name is LIRI. Please type one of these commands: my-tweets , spotify-this-song <type a song name> , movie-this <type a movie name> , do-what-it-says")
-		break;
+	// Give user command options.
+	console.log("Hello, my name is LIRI. Please type one of these commands: my-tweets , spotify-this-song <type a song name> , movie-this <type a movie name> , do-what-it-says")
+	break;
 };
 
 function twitterApi() { 
@@ -50,8 +50,8 @@ function twitterApi() {
 		    	console.log("Created at: " + tweets[i].created_at);
 		    	console.log("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
 		    	
-		    	fs.appendFile('log.txt', "\n@" + tweets[i].user.name + " \nTweet: " + tweets[i].text + 
-		    		" \nCreated at: " + tweets[i].created_at + "\n---------------------twitter----------------------")
+		    	fs.appendFile('log.txt', "\n@" + tweets[i].user.name + "\nTweet: " + tweets[i].text + 
+		    	"\nCreated at: " + tweets[i].created_at + "\n---------------------twitter----------------------")
 		    } 
   		} 
 	}) 
@@ -78,7 +78,7 @@ function spotifyApi() {
 				console.log("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
 			
 				fs.appendFile('log.txt', "\nArtist: " + songData.artists[0].name + "\nSong: " + songData.name + "\nPreview Song: " + 
-					songData.preview_url + "\nAlbum: " + songData.album.name + "\n---------------------spotify----------------------")
+				songData.preview_url + "\nAlbum: " + songData.album.name + "\n---------------------spotify----------------------")
 			}
  		} 
 
@@ -101,20 +101,21 @@ function omdbApi() {
 
 	request(queryUrl, function(error, response, body) {
 		if (!error && response.statusCode == 200) {
+		
 			var body = JSON.parse(body);
 
-		console.log("Title: " + body.Title);
-		console.log("Year: " + body.Year);
-		console.log("IMBD Rating: " + body.imdbRating);
-		console.log("Rotten Tomatoes Rating: " + body.tomatoRating);
-		console.log("Country: " + body.Country);
-		console.log("Language: " + body.Language);
-		console.log("Plot: " + body.Plot);
-		console.log("Actors: " + body.Actors);
+			console.log("Title: " + body.Title);
+			console.log("Year: " + body.Year);
+			console.log("IMBD Rating: " + body.imdbRating);
+			console.log("Rotten Tomatoes Rating: " + body.tomatoRating);
+			console.log("Country: " + body.Country);
+			console.log("Language: " + body.Language);
+			console.log("Plot: " + body.Plot);
+			console.log("Actors: " + body.Actors);
 
-		fs.appendFile('log.txt', "\nTitle: " + body.Title + "\nYear: " + body.Year + " \nIMDB Rating: " + body.imdbRating + 
-			" \nRotten Tomatoes Rating: " + body.tomatoRating + " \nCountry: " + body.Country + " \nLanguage: " + body.Language + 
-			" \nPlot: " + body.Plot + " \nActors: " + body.Actors + "\n---------------------MOVIE----------------------")
+			fs.appendFile('log.txt', "\nTitle: " + body.Title + "\nYear: " + body.Year + "\nIMDB Rating: " + body.imdbRating + 
+			"\nRotten Tomatoes Rating: " + body.tomatoRating + "\nCountry: " + body.Country + "\nLanguage: " + body.Language + 
+			"\nPlot: " + body.Plot + "\nActors: " + body.Actors + "\n---------------------MOVIE----------------------")
 		} 
 
 		else {
@@ -139,5 +140,9 @@ function randomTxt() {
     	}
   	});
 } 
+
+
+
+
 
 
